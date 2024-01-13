@@ -1,5 +1,5 @@
 import { StatusCode } from "@/constants/app.constants";
-import { BigPromise } from "@/utils";
+import BigPromise from "@/utils/bigPromise";
 import { NextFunction, Request, Response } from "express";
 
 class ProductController {
