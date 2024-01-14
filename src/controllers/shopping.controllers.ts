@@ -22,4 +22,4 @@ class ShoppingController {
   );
 }
 
-export default new ShoppingController();
+export default ShoppingController;

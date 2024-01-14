@@ -18,7 +18,6 @@ const ProductSchema = new Schema<IProduct>(
     timestamps: true,
     toJSON: {
       transform(_, ret) {
-        ret.id = ret._id;
         delete ret.__v;
       },
     },

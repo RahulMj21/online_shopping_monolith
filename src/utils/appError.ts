@@ -4,7 +4,7 @@ export class AppError extends Error {
   name: string;
   statusCode: number;
   description: string;
-  isOperational: boolean;
+  isOperational?: boolean;
   errorStack: any;
   loggingErrorResponse: any;
 
@@ -12,7 +12,7 @@ export class AppError extends Error {
     name: string,
     statusCode: number,
     description: string,
-    isOperational: boolean,
+    isOperational?: boolean,
     errorStack?: any,
     loggingErrorResponse?: any,
   ) {
@@ -33,7 +33,7 @@ export class ApiError extends AppError {
     name: string,
     statusCode: number = StatusCode.SERVER_ERROR,
     description: string = "internal server error",
-    isOperational: boolean,
+    isOperational?: boolean,
   ) {
     super(name, statusCode, description, isOperational);
   }

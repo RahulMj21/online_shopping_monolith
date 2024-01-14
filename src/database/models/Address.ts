@@ -13,7 +13,6 @@ const AddressSchema = new Schema<IAddress>(
   {
     toJSON: {
       transform(_, ret) {
-        ret.id = ret._id;
         delete ret.__v;
       },
     },

@@ -2,9 +2,10 @@ import { ShoppingControllers } from "@/controllers";
 import { Router } from "express";
 
 const router = Router();
+const Shopping = new ShoppingControllers();
 
-router.post("/order", ShoppingControllers.placeOrder);
-router.get("/orders", ShoppingControllers.getShoppingOrders);
-router.get("/cart", ShoppingControllers.getShoppingCart);
+router.post("/order", Shopping.placeOrder);
+router.get("/orders", Shopping.getShoppingOrders);
+router.get("/cart", Shopping.getShoppingCart);
 
 export default router;

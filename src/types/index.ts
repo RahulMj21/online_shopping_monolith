@@ -10,7 +10,7 @@ export interface IUser {
   password: string;
   phone: string;
   address: (IAddress | string)[];
-  cart: (ICartItem | string)[];
+  cart: ICartItem[];
   wishlist: (IProduct | string)[];
   orders: (IOrder | string)[];
 }
@@ -43,4 +43,20 @@ export interface IOrder {
 export interface ICartItem {
   product: IProduct | string;
   unit: number;
+}
+
+export interface ICreateProductInput {
+  name: string;
+  type: string;
+  unit: number;
+  price: number;
+  banner: string;
+  suplier: string;
+  available: boolean;
+  description: string;
+}
+
+export interface ICreateOrderInput {
+  customerId: string;
+  txnId: string;
 }
