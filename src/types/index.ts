@@ -1,4 +1,5 @@
 export interface IAddress {
+  _id: string;
   street: string;
   postalCode: string;
   city: string;
@@ -6,6 +7,7 @@ export interface IAddress {
 }
 
 export interface IUser {
+  _id: string;
   email: string;
   password: string;
   phone: string;
@@ -16,6 +18,7 @@ export interface IUser {
 }
 
 export interface IProduct {
+  _id: string;
   name: string;
   description: string;
   banner: string;
@@ -59,4 +62,24 @@ export interface ICreateProductInput {
 export interface ICreateOrderInput {
   customerId: string;
   txnId: string;
+}
+
+export interface ICreateCustomerInput {
+  email: string;
+  password: string;
+  phone: string;
+}
+
+export interface ICreateAddressInput {
+  customerId: string;
+  street: string;
+  postalCode: string;
+  city: string;
+  country: string;
+}
+export interface IAddToCartInput {
+  customerId: string;
+  product: IProduct;
+  qty: number;
+  isRemove: boolean;
 }
