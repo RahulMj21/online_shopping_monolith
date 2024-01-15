@@ -1,3 +1,5 @@
+import { Request } from "express";
+
 export interface IAddress {
   _id: string;
   street: string;
@@ -82,4 +84,7 @@ export interface IAddToCartInput {
   product: IProduct;
   qty: number;
   isRemove: boolean;
+}
+export interface IRequest extends Request {
+  user?: IUser;
 }
