@@ -33,3 +33,11 @@ export const validateSignature = (req: IRequest) => {
     return false;
   }
 };
+
+export const formateData = (data: any) => {
+  if (data) {
+    return { data };
+  } else {
+    throw new Error("Data Not found!");
+  }
+};
