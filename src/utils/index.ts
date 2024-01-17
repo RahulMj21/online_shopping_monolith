@@ -1,8 +1,7 @@
 import config from "@/config";
-import { IRequest, IUser } from "@/types";
+import { IGenerateSignatureInput, IRequest, IUser } from "@/types";
 import { Logger } from "@/utils/logger";
 import argon from "argon2";
-import { Request } from "express";
 import JWT from "jsonwebtoken";
 
 export const generatePassword = async (password: string) => {
@@ -16,7 +15,7 @@ export const validatePassword = async (
   return await argon.verify(passwordHash, password);
 };
 
-export const generateSignature = (payload: IUser) => {
+export const generateSignature = (payload: IGenerateSignatureInput) => {
   return JWT.sign(payload, config.TOKEN_SECRET, { expiresIn: "30d" });
 };
 

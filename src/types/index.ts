@@ -88,3 +88,14 @@ export interface IAddToCartInput {
 export interface IRequest extends Request {
   user?: IUser;
 }
+
+export interface ISignInInput {
+  email: string;
+  password: string;
+}
+
+export interface IGenerateSignatureInput {
+  email: string;
+  phone: string;
+  _id: string;
+}
