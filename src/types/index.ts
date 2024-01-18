@@ -1,5 +1,14 @@
 import { Request } from "express";
 
+// Types
+export type TEvent =
+  | "ADD_TO_WISHLIST"
+  | "REMOVE_FROM_WISHLIST"
+  | "ADD_TO_CART"
+  | "REMOVE_FROM_CART"
+  | "CREATE_ORDER";
+
+// Interfaces
 export interface IAddress {
   _id: string;
   street: string;
@@ -94,8 +103,26 @@ export interface ISignInInput {
   password: string;
 }
 
+export interface ISignUpInput {
+  email: string;
+  password: string;
+  phone: string;
+}
+
 export interface IGenerateSignatureInput {
   email: string;
   phone: string;
   _id: string;
+}
+
+export interface IEventData {
+  customerId: string;
+  product: IProduct;
+  order: IOrder;
+  qty: number;
+}
+
+export interface IEventPayload {
+  event: TEvent;
+  data: IEventData;
 }
