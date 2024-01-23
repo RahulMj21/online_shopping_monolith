@@ -8,6 +8,7 @@ import {
   productRoutes,
   shoppingRoutes,
 } from "@/routes";
+import errorHandler from "@/middleware/errorHandler";
 
 const app = express();
 
@@ -23,5 +24,8 @@ app.use("/api", healthcheckRoutes);
 app.use("/api/customer", customerRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/shopping", shoppingRoutes);
+
+// error handling
+app.use(errorHandler);
 
 export default app;

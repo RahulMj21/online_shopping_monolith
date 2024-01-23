@@ -57,6 +57,7 @@ class ProductController {
         const { _id } = req.user;
         const product: { data: IProduct } =
           await productService.getProductDetails(req.body._id);
+
         const wishlist = await customerService.addToWishlist(_id, product.data);
         return res.status(StatusCode.CREATED).json(wishlist);
       }
@@ -65,26 +66,65 @@ class ProductController {
   );
 
   removeFromWishlist = BigPromise(
-    async (_req: Request, res: Response, _next: NextFunction) => {
-      return res.status(StatusCode.CREATED).json({ status: "OK" });
+    async (req: IRequest, res: Response, _next: NextFunction) => {
+      if (req.user) {
+        const { _id } = req.user;
+        const productId = req.params.id;
+
+        const product: { data: IProduct } =
+          await productService.getProductDetails(productId);
+
+        const wishlist = await customerService.addToWishlist(_id, product.data);
+        return res.status(StatusCode.CREATED).json(wishlist);
+      }
+      return res.status(StatusCode.SERVER_ERROR).json({ status: "ERROR" });
     },
   );
 
   addToCart = BigPromise(
-    async (_req: Request, res: Response, _next: NextFunction) => {
-      return res.status(StatusCode.CREATED).json({ status: "OK" });
+    async (req: IRequest, res: Response, _next: NextFunction) => {
+      if (req.user) {
+        const { _id, qty } = req.body;
+
+        const { data }: { data: IProduct } =
+          await productService.getProductDetails(_id);
+
+        const result = await customerService.manageCart({
+          qty,
+          product: data,
+          customerId: req.user._id,
+          isRemove: false,
+        });
+
+        return res.status(StatusCode.CREATED).json(result);
+      }
+      return res.status(StatusCode.SERVER_ERROR).json({ status: "ERROR" });
     },
   );
 
   removeFromCart = BigPromise(
-    async (_req: Request, res: Response, _next: NextFunction) => {
-      return res.status(StatusCode.CREATED).json({ status: "OK" });
+    async (req: IRequest, res: Response, _next: NextFunction) => {
+      if (req.user) {
+        const { data }: { data: IProduct } =
+          await productService.getProductDetails(req.params.id);
+
+        const result = await customerService.manageCart({
+          qty: 0,
+          product: data,
+          customerId: req.user._id,
+          isRemove: true,
+        });
+
+        return res.status(StatusCode.CREATED).json(result);
+      }
+      return res.status(StatusCode.SERVER_ERROR).json({ status: "ERROR" });
     },
   );
 
   getAllProducts = BigPromise(
     async (_req: Request, res: Response, _next: NextFunction) => {
-      return res.status(StatusCode.CREATED).json({ status: "OK" });
+      const { data } = await productService.getProducts();
+      return res.status(StatusCode.CREATED).json(data);
     },
   );
 }
